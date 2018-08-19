@@ -3,10 +3,8 @@ import GifList from '../search/GifList';
 import { searchGifs } from '../util/GIPHYAPIUtils';
 import { withRouter } from 'react-router-dom';
 import './Search.css';
-import { Form, Input, Button, notification } from 'antd';
+import { Form, Input, Button} from 'antd';
 const FormItem = Form.Item;
-const GIPHY_API_BASE_URL = 'https://api.giphy.com/v1/gifs';
-const GIPHY_API_KEY = 'Scc6Jv5WrveIWlyNOnZ8aWKTtNmT3K2k';
 
 class Search extends Component {
     constructor(props) {
@@ -20,31 +18,20 @@ class Search extends Component {
     }
 	
 	fetchResults(props){
-		//Replace Space with + to search for multiple items
-		const giphyPhrase = this.state.phrase.replace(/\s/g, '+');
+		let promise;
 		
-        const url = GIPHY_API_BASE_URL + "/search?q="+giphyPhrase+"&api_key="+GIPHY_API_KEY;
-		
-		fetch(url, {
-			method: "GET",dataType: 'json',
-			headers: {
-			'Accept': 'application/json'
-			}  
-			}).then(response => response.json())
-			.then(response => {
-				if (response.data.length > 0) {
-					this.setState({gifs: response.data});
-				} 
-			});
+		promise = searchGifs(this.state.phrase);
+		promise.then(response => {
+			if (response.data.length > 0) {
+				this.setState({gifs: response.data});
+			}
+		});
 	}
 		
 	
 	handleInputChange(event) {
         this.setState({phrase: event.target.value});
     }  
-
-
-	
 
     render() {
 

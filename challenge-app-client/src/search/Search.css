@@ -1,0 +1,9 @@
+.search-container {
+    max-width: 420px;
+    margin: 0 auto;
+    margin-top: 40px;    
+}
+
+.search-form input {
+    margin-bottom: 3px;
+}

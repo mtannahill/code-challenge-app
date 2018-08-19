@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
+import './GifList.css';
 
-class DisplayImages extends Component {
+class GifList extends Component {
 
     render() {
      		
     return (
-      <div className="GifList">
+      <div className="list-container">
          
        { this.props.gifs.length > 0 &&
 
-          this.props.gifs.map(( { images }) => (
-           <img  src={ images.preview_gif.url } width="200px" height="200px" />
-                        ))          
+         this.props.gifs.map(( { id, images }, i) => (
+		  
+			// <GifItem  images = {images} />
+			<span className="gif-item" key={i}>
+				<img  key={i} alt = {id} src={ images.preview_gif.url } width="200px" height="200px" />
+		   </span>
+           ))          
         }
       </div>
     );
   }
 }
 
-export default DisplayImages;
+export default GifList;

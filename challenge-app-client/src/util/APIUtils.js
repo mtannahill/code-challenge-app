@@ -80,3 +80,11 @@ export function saveGifFavorite(gifData){
 	});
 }
 
+export function deleteGifFavorite(gifData){
+	    return request({
+        url: API_BASE_URL + "/gif/",
+        method: 'DELETE',
+        body: JSON.stringify(gifData)
+	});
+}
+

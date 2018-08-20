@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { saveGifFavorite } from '../util/APIUtils';
+import { saveGifFavorite, deleteGifFavorite } from '../util/APIUtils';
 import {notification } from 'antd';
 import './GifItem.css';
 
@@ -8,31 +8,44 @@ class GifItem extends Component {
     super(props);
 
     this.state = { 
-	  isFavorited: this.props.isFavorited
+	  favorited: this.props.isFavorited
 	};
-    this.handleChange = this.handleChange.bind(this);
   }
   
-  handleChange() {
+  handleFavorite(){  
+    const gifData = {giphyid: this.props.id};
 	
-	const gifData = {giphyid: this.props.id};
-
-    saveGifFavorite(gifData)
+	saveGifFavorite(gifData)
 		.then(response => {
-            this.setState({
-				isFavorited: !this.state.isFavorited
-			})       
+            this.setState({ favorited: true });     
     }).catch(error => {
         if(error.status === 401) {
             this.props.handleLogout('/login', 'error', 'You have been logged out. Please login to save favorite gifs.');    
         } else {
             notification.error({
-                message: 'Giphy Search',
-                description: error.message || 'Sorry! Something went wrong. Please try again!'
+              message: 'Giphy Search',
+              description: error.message || 'Sorry! Something went wrong. Please try again!'
             });                
         }
 	});	
-	  
+  }
+  
+  handleUnfavorite(){
+    const gifData = {giphyid: this.props.id};
+	
+	deleteGifFavorite(gifData)
+		.then(response => {
+            this.setState({ favorited: false });      
+    }).catch(error => {
+        if(error.status === 401) {
+            this.props.handleLogout('/login', 'error', 'You have been logged out. Please login to save favorite gifs.');    
+        } else {
+            notification.error({
+              message: 'Giphy Search',
+              description: error.message || 'Sorry! Something went wrong. Please try again!'
+            });                
+        }
+	});	
   }
 
   renderHeart = () => {
@@ -40,9 +53,11 @@ class GifItem extends Component {
             return '';
         }
 		
-		var classes = this.state.isFavorited ? "favorite fa fa-heart" : "favorite fa fa-heart-o"
+		if (this.state.favorited) {
+            return <i className="favorite fa fa-heart" onClick={() => this.handleUnfavorite()} />;
+        }
 
-        return <i className={classes} onClick={() => this.handleChange()} />;
+        return <i className="favorite fa fa-heart-o" onClick={() => this.handleFavorite()} />;
   };
   
   render() {

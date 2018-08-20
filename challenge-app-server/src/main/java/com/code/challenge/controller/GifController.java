@@ -32,7 +32,7 @@ public class GifController {
     }
 
     @PostMapping
-    public ResponseEntity<?> saveGif(@Valid @RequestBody GifRequest gifRequest, @CurrentUser UserPrincipal currentUser) {
+    public ResponseEntity<?> saveGifFavorite(@Valid @RequestBody GifRequest gifRequest, @CurrentUser UserPrincipal currentUser) {
         Gif gif = gifService.saveGif(gifRequest, currentUser);
 
         URI location = ServletUriComponentsBuilder
@@ -41,6 +41,16 @@ public class GifController {
 
         return ResponseEntity.created(location)
                 .body(new ApiResponse(true, "Gif Favorite Saved Successfully"));
+    }
+    
+    @DeleteMapping
+    public ResponseEntity<?> deleteGifFavorite(@Valid @RequestBody GifRequest gifRequest, @CurrentUser UserPrincipal currentUser) {
+    	gifService.deleteGif(gifRequest, currentUser);
+    	
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest().build().toUri();
+    	
+    	return ResponseEntity.created(location).body(new ApiResponse(true, "Gif Unfavorite Saved Successfully"));
     }
 
 

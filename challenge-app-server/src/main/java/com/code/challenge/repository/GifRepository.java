@@ -16,6 +16,8 @@ public interface GifRepository extends JpaRepository<Gif, Long> {
     List<Gif> findByUserId(Long userId);
     
     Optional<Gif> findById(Long gifId);
+    
+    Optional<Gif> findByUserIdAndGiphyid(Long userId, String giphyId);
 
     @Query("SELECT COUNT(g.id) from Gif g where g.user.id = :userId")
     long countByUserId(@Param("userId") Long userId);

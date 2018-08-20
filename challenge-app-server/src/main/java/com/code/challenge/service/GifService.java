@@ -63,6 +63,21 @@ public class GifService {
 
         return gif;
 	}
+	
+	public void deleteGif(GifRequest gifRequest, UserPrincipal currentUser) {
+		
+		User user = userRepository.getOne(currentUser.getId());
+		
+		Gif gif = gifRepository.findByUserIdAndGiphyid(user.getId(), gifRequest.getGiphyid()).orElseThrow(
+				() -> new ResourceNotFoundException("Gif", "giphyid", gifRequest.getGiphyid()));
+        
+        try {
+            gifRepository.delete(gif);
+        } catch (DataIntegrityViolationException ex) {
+            logger.info("User {} has already Unfavorited Gif {}", currentUser.getId(), gifRequest.getGiphyid());
+            throw new BadRequestException("Sorry! You have already unfavorited this gif");
+        }
+	}
 
 	public GifResponse getGifById(Long gifId, UserPrincipal currentUser) {
 		

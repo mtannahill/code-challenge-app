@@ -71,3 +71,12 @@ export function getUserProfile(username) {
         method: 'GET'
     });
 }
+
+export function saveGifFavorite(gifData){
+    return request({
+        url: API_BASE_URL + "/gif/",
+        method: 'POST',
+        body: JSON.stringify(gifData)
+	});
+}
+

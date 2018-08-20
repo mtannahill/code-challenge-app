@@ -49,7 +49,7 @@ class AppHeader extends Component {
             <Header className="app-header">
             <div className="container">
               <div className="app-title" >
-                <Link to="/">Code Challenge App</Link>
+                <Link to="/">Giphy Search</Link>
               </div>
               <Menu
                 className="app-menu"

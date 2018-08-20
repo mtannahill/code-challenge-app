@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GifItem from '../search/GifItem';
 import './GifList.css';
 
 class GifList extends Component {
@@ -7,14 +8,18 @@ class GifList extends Component {
      		
     return (
       <div className="list-container">
-         
-       { this.props.gifs.length > 0 &&
-
-         this.props.gifs.map(( { id, images }, i) => (
+       
+       { this.props.gifs.length > 0 && 
+	     this.props.gifs.map(( { id, slug, images }, i) => (
 		  
-			// <GifItem  images = {images} />
 			<span className="gif-item" key={i}>
-				<img  key={i} alt = {id} src={ images.preview_gif.url } width="200px" height="200px" />
+				<GifItem num={i} 
+				         id = {id} 
+						 desc = {slug} 
+						 url={ images.preview_gif.url}
+						 isFavorited = {false}
+						 isAuthenticated = {this.props.isAuthenticated} 
+						 handleLogout={this.props.handleLogout} />
 		   </span>
            ))          
         }

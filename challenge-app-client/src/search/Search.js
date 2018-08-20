@@ -58,7 +58,9 @@ class Search extends Component {
 						</FormItem>
                     </Form>
                 </div>
-				<GifList gifs={this.state.gifs} />
+				<GifList gifs={this.state.gifs} 
+				         isAuthenticated={this.props.isAuthenticated} 
+						 handleLogout={this.props.handleLogout}/>
             </div>
         );
 	}

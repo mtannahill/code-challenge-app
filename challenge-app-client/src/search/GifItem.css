@@ -1,0 +1,15 @@
+.fa-heart {
+    color: #fb3958;
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+.fa-heart-o {
+	color: #000000;
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}

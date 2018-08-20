@@ -38,7 +38,7 @@ class GifItem extends Component {
             this.setState({ favorited: false });      
     }).catch(error => {
         if(error.status === 401) {
-            this.props.handleLogout('/login', 'error', 'You have been logged out. Please login to save favorite gifs.');    
+            this.props.handleLogout('/login', 'error', 'You have been logged out. Please login to un-save favorite gifs.');    
         } else {
             notification.error({
               message: 'Giphy Search',
@@ -65,7 +65,7 @@ class GifItem extends Component {
     return (
 	  <span className="gif-container"> 
 		{ this.renderHeart() }
-		<img  key={this.props.num} alt = {this.props.desc} src={this.props.url} width="200px" height="200px" />
+		<img  key={this.props.id} alt = {this.props.desc} src={this.props.url} width="200px" height="200px" />
 	  </span>
     );
   }

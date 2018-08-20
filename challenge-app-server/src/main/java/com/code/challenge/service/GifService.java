@@ -78,6 +78,10 @@ public class GifService {
             throw new BadRequestException("Sorry! You have already unfavorited this gif");
         }
 	}
+	
+	public Boolean existsByUserIdAndGiphyid(String giphyId, UserPrincipal currentUser) {		
+		return gifRepository.existsByUserIdAndGiphyid(currentUser.getId(), giphyId);
+	}
 
 	public GifResponse getGifById(Long gifId, UserPrincipal currentUser) {
 		
@@ -90,10 +94,10 @@ public class GifService {
 		return ModelMapper.mapGifToGifResponse(gif, user);
 	}
 
-	public GifResponse updateLabelAndGetUpdatedGif(Long gifId, @Valid LabelRequest labelRequest) {
+	public GifResponse updateLabelAndGetUpdatedGif(String giphyId, UserPrincipal currentUser, @Valid LabelRequest labelRequest) {
 		
-		Gif gif = gifRepository.findById(gifId)
-                .orElseThrow(() -> new ResourceNotFoundException("Gif", "id", gifId));
+		Gif gif = gifRepository.findByUserIdAndGiphyid(currentUser.getId(), giphyId)
+                .orElseThrow(() -> new ResourceNotFoundException("Gif", "id", giphyId));
 		
 		gif.setLabel(labelRequest.getLabel());
 		

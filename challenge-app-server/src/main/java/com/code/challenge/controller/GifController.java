@@ -53,15 +53,20 @@ public class GifController {
     	return ResponseEntity.created(location).body(new ApiResponse(true, "Gif Unfavorite Saved Successfully"));
     }
 
+    @GetMapping("/favorite/{giphyId}")
+    public GifFavoriteResponse checkGifFavorite(@PathVariable String giphyId, @CurrentUser UserPrincipal currentUser) {
+        Boolean isFavorite = gifService.existsByUserIdAndGiphyid(giphyId, currentUser);
+        return new GifFavoriteResponse(isFavorite);
+    }
 
     @GetMapping("/{gifId}")
     public GifResponse getGifById(@CurrentUser UserPrincipal currentUser, @PathVariable Long gifId) {
         return gifService.getGifById(gifId, currentUser);
     }
 
-    @PostMapping("/{gifId}/label")
-    public GifResponse updateLabel(@PathVariable Long gifId, @Valid @RequestBody LabelRequest labelRequest) {
-        return gifService.updateLabelAndGetUpdatedGif(gifId, labelRequest);
+    @PostMapping("/label/{giphyId}")
+    public GifResponse updateLabel(@PathVariable String giphyId, @CurrentUser UserPrincipal currentUser, @Valid @RequestBody LabelRequest labelRequest) {
+        return gifService.updateLabelAndGetUpdatedGif(giphyId, currentUser, labelRequest);
     }
 
 }

@@ -88,3 +88,18 @@ export function deleteGifFavorite(gifData){
 	});
 }
 
+export function checkGifFavorite(giphyId) {
+    return request({
+        url: API_BASE_URL + "/gif/favorite/" + giphyId,
+        method: 'GET'
+    });
+}
+
+export function updateLabel(giphyId, gifData){
+    return request({
+        url: API_BASE_URL + "/gif/lable"+giphyId,
+        method: 'POST',
+        body: JSON.stringify(gifData)
+	});
+}
+

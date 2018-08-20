@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
+import { checkGifFavorite } from '../util/APIUtils';
 import GifItem from '../search/GifItem';
 import './GifList.css';
 
 class GifList extends Component {
+	
+	isFavorited(id){
+	    checkGifFavorite(id)
+        .then(response => {
+            if(response.available) {return true;}
+            else {return false;}
+        }).catch(error => {
+            return true;
+        });
+	}
 
     render() {
      		
@@ -13,11 +24,10 @@ class GifList extends Component {
 	     this.props.gifs.map(( { id, slug, images }, i) => (
 		  
 			<span className="gif-item" key={i}>
-				<GifItem num={i} 
-				         id = {id} 
+				<GifItem id = {id} 
 						 desc = {slug} 
 						 url={ images.preview_gif.url}
-						 isFavorited = {false}
+						 isFavorited = {this.isFavorited(id)}
 						 isAuthenticated = {this.props.isAuthenticated} 
 						 handleLogout={this.props.handleLogout} />
 		   </span>

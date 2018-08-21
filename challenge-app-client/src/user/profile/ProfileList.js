@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import GifItem from '../search/GifItem';
-import './GifList.css';
+import GifItem from '../../search/GifItem';
+import './ProfileList.css';
 
-class GifList extends Component {
+class ProfileList extends Component {
 	
     render() {
      		
@@ -10,16 +10,16 @@ class GifList extends Component {
       <div className="list-container">
        
        { this.props.gifs.length > 0 && 
-	     this.props.gifs.map(( { id, title, images}, i) => (
+	     this.props.gifs.map(( { giphyid, title, url}, i) => (
          
 		  
 			<span className="gif-item" key={i}>
-				<GifItem id = {id} 
+				<GifItem id = {giphyid} 
 						 desc = {title} 
-						 url={ images.preview_gif.url}
+						 url={ url}
 						 isAuthenticated = {this.props.isAuthenticated} 
 						 handleLogout={this.props.handleLogout} 
-                         isChangeFav = {true}/>
+                         isChangeFav = {false}/>
 		   </span>
            ))          
         }
@@ -28,4 +28,4 @@ class GifList extends Component {
   }
 }
 
-export default GifList;
+export default ProfileList;

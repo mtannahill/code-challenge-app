@@ -88,9 +88,9 @@ export function deleteGifFavorite(gifData){
 	});
 }
 
-export function checkGifFavorite(giphyId) {
+export function getGifByGiphyId(giphyId) {
     return request({
-        url: API_BASE_URL + "/gif/favorite/" + giphyId,
+        url: API_BASE_URL + "/gif/giphy/" + giphyId,
         method: 'GET'
     });
 }
@@ -102,9 +102,9 @@ export function getUserGifs() {
     });
 }
 
-export function updateLabel(giphyId, gifData){
+export function updateGifLabel(giphyId, gifData){
     return request({
-        url: API_BASE_URL + "/gif/label"+giphyId,
+        url: API_BASE_URL + "/gif/label/"+giphyId,
         method: 'POST',
         body: JSON.stringify(gifData)
 	});

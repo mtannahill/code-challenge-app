@@ -10,6 +10,8 @@ public class GifResponse {
 	 private String giphyid;
 	 private Instant creationDateTime;
 	 private UserSummary createdBy;
+	 private String title;
+	 private String url;
 
 	 @JsonInclude(JsonInclude.Include.NON_NULL)
 	 private String label;
@@ -52,5 +54,21 @@ public class GifResponse {
 
 		public void setCreationDateTime(Instant creationDateTime) {
 			this.creationDateTime = creationDateTime;
+		}
+
+		public String getTitle() {
+			return title;
+		}
+
+		public void setTitle(String title) {
+			this.title = title;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
 		}
 }

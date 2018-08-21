@@ -30,6 +30,12 @@ public class Gif extends DateAudit{
     
     @Size(max = 60)
     private String label;
+    
+    @Size(max = 200)
+    private String title;
+    
+    @Size(max = 500)
+    private String url;
 
     public Long getId() {
         return id;
@@ -61,6 +67,22 @@ public class Gif extends DateAudit{
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 

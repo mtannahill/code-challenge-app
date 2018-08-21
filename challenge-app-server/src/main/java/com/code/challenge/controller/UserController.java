@@ -1,15 +1,11 @@
 package com.code.challenge.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.code.challenge.exception.ResourceNotFoundException;
-import com.code.challenge.model.Gif;
 import com.code.challenge.model.User;
 import com.code.challenge.payloads.UserIdentityAvailability;
 import com.code.challenge.payloads.UserProfile;

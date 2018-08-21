@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GifList from '../search/GifList';
+import LoadingIndicator  from '../common/LoadingIndicator';
 import { searchGifs } from '../util/GIPHYAPIUtils';
 import { withRouter } from 'react-router-dom';
 import './Search.css';
@@ -19,12 +20,20 @@ class Search extends Component {
     }
 	
 	fetchResults(props){
+        this.setState({
+            isLoading: true
+        });
+        
 		let promise;
 		
+        {/* fetch GIFS from GIPHY API */}
 		promise = searchGifs(this.state.phrase);
 		promise.then(response => {
 			if (response.data.length > 0) {
-				this.setState({gifs: response.data});
+				this.setState({
+                               gifs: response.data,
+                               isLoading: false
+                              });
 			}
 		});
 	}	
@@ -34,6 +43,9 @@ class Search extends Component {
     }  
 
     render() {
+        if(this.state.isLoading) {
+            return <LoadingIndicator />;
+        }
        
         return (
 			<div className="search-container">
@@ -49,7 +61,7 @@ class Search extends Component {
                                 autoComplete="off"
                                 placeholder="Search for gifs!"
                                 value={this.state.phrase} 
-                                onChange={(event) => this.handleInputChange(event, this.validatePhrase)} />    
+                                onChange={(event) => this.handleInputChange(event)} />    
                             <Button type="primary" 
                                 htmlType="submit" 
                                 size="large" 

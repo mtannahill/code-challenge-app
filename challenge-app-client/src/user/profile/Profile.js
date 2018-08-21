@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { getUserProfile } from '../../util/APIUtils';
+import { getUserProfile, getUserGifs } from '../../util/APIUtils';
 import { Avatar} from 'antd';
 import { getAvatarColor } from '../../util/Colors';
 import { formatDate } from '../../util/Helpers';
+import ProfileList from '../profile/ProfileList';
 import LoadingIndicator  from '../../common/LoadingIndicator';
 import './Profile.css';
 import NotFound from '../../common/NotFound';
@@ -13,9 +14,11 @@ class Profile extends Component {
         super(props);
         this.state = {
             user: null,
-            isLoading: false
+            isLoading: false,
+            gifs: []
         }
         this.loadUserProfile = this.loadUserProfile.bind(this);
+        this.loadUserGifs = this.loadUserGifs.bind(this);
     }
 
     loadUserProfile(username) {
@@ -43,15 +46,43 @@ class Profile extends Component {
             }
         });        
     }
+
+    loadUserGifs() {
+        this.setState({
+            isLoading: true
+        });
+
+        getUserGifs()
+        .then(response => {
+            this.setState({
+                gifs: response,
+                isLoading: false
+            });
+        }).catch(error => {
+            if(error.status === 404) {
+                this.setState({
+                    gifs: [],
+                    isLoading: false
+                });
+            } else {
+                this.setState({
+                    serverError: true,
+                    isLoading: false
+                });        
+            }
+        });        
+    }
       
     componentDidMount() {
         const username = this.props.match.params.username;
         this.loadUserProfile(username);
+        this.loadUserGifs();
     }
 
     componentWillReceiveProps(nextProps) {
         if(this.props.match.params.username !== nextProps.match.params.username) {
             this.loadUserProfile(nextProps.match.params.username);
+            this.loadUserGifs();
         }        
     }
 
@@ -87,6 +118,9 @@ class Profile extends Component {
                                     </div>
                                 </div>
                             </div> 
+                            <ProfileList gifs={this.state.gifs}              
+				         isAuthenticated={this.props.isAuthenticated} 
+						 handleLogout={this.props.handleLogout}/>
                         </div>  
                     ): null               
                 }

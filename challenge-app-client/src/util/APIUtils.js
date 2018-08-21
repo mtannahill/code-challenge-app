@@ -95,9 +95,16 @@ export function checkGifFavorite(giphyId) {
     });
 }
 
+export function getUserGifs() {
+    return request({
+        url: API_BASE_URL + "/gif/",
+        method: 'GET'
+    });
+}
+
 export function updateLabel(giphyId, gifData){
     return request({
-        url: API_BASE_URL + "/gif/lable"+giphyId,
+        url: API_BASE_URL + "/gif/label"+giphyId,
         method: 'POST',
         body: JSON.stringify(gifData)
 	});

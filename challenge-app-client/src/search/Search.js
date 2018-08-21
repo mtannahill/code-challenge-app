@@ -14,6 +14,7 @@ class Search extends Component {
 			isLoading: false,
 			gifs: []
 		};	
+
 		this.handleInputChange = this.handleInputChange.bind(this);
     }
 	
@@ -26,15 +27,14 @@ class Search extends Component {
 				this.setState({gifs: response.data});
 			}
 		});
-	}
-		
+	}	
 	
 	handleInputChange(event) {
         this.setState({phrase: event.target.value});
     }  
 
     render() {
-
+       
         return (
 			<div className="search-container">
                 <div className="search-content">
@@ -58,7 +58,7 @@ class Search extends Component {
 						</FormItem>
                     </Form>
                 </div>
-				<GifList gifs={this.state.gifs} 
+				<GifList gifs={this.state.gifs}              
 				         isAuthenticated={this.props.isAuthenticated} 
 						 handleLogout={this.props.handleLogout}/>
             </div>

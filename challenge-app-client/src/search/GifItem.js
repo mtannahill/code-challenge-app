@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { saveGifFavorite, deleteGifFavorite } from '../util/APIUtils';
+import { saveGifFavorite, deleteGifFavorite, checkGifFavorite } from '../util/APIUtils';
 import {notification } from 'antd';
 import './GifItem.css';
 
@@ -8,8 +8,12 @@ class GifItem extends Component {
     super(props);
 
     this.state = { 
-	  favorited: this.props.isFavorited
+	  favorited: false
 	};
+    
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this.componentDidUpdate = this.componentDidUpdate.bind(this);
+    this.loadFavorites = this.loadFavorites.bind(this);
   }
   
   handleFavorite(){  
@@ -46,6 +50,29 @@ class GifItem extends Component {
             });                
         }
 	});	
+  }
+  
+  componentDidMount() {
+    this.loadFavorites();
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (this.props.id !== prevProps.id) {
+        this.loadFavorites();
+    }
+  }
+  
+  loadFavorites(){
+    checkGifFavorite(this.props.id).then(response => {
+            if(response.favorite) {
+                this.setState({ favorited: true });
+            }
+            else {
+                this.setState({ favorited: false });
+            }
+        }).catch(error => {
+            this.setState({ favorited: true });
+        });
   }
 
   renderHeart = () => {

@@ -50,3 +50,15 @@ This is an app to search and favorite Gifs from Giphy built using React, Spring 
     ```
 
     The front-end server will be on port `3000`.   Go To http://localhost:3000/ to access the app!
+    
+# Possible Future Improvements
+
+    - Adding User Roles to Security
+    - Allow User to Edit Profile details such as name, userid, or email
+    - Forgot Password functionality
+    - Login/Register using Google or Facebook
+    - More Responsive UI
+    - Heart displays over gif when hover, other fun UI updates (animation?)
+    - Gif Modal to view more information about gif and favorite/update labels
+    - Search on the users created labels/categories
+    - Export/Post gif to email or social media

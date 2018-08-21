@@ -32,7 +32,7 @@ This is an app to search and favorite Gifs from Giphy built using React, Spring 
 	mvn spring-boot:run
 	```
 
-	The back-end server will be on port 5000.
+	The back-end server will be on port '5000'.
     
 # Front-end App Setup 
 

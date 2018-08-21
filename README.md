@@ -53,12 +53,12 @@ This is an app to search and favorite Gifs from Giphy built using React, Spring 
     
 # Possible Future Improvements
 
-    - Adding User Roles to Security
-    - Allow User to Edit Profile details such as name, userid, or email
-    - Forgot Password functionality
-    - Login/Register using Google or Facebook
-    - More Responsive UI
-    - Heart displays over gif when hover, other fun UI updates (animation?)
-    - Gif Modal to view more information about gif and favorite/update labels
-    - Search on the users created labels/categories
-    - Export/Post gif to email or social media
+- Adding User Roles to Security
+- Allow User to Edit Profile details such as name, userid, or email
+- Forgot Password functionality
+- Login/Register using Google or Facebook
+- More Responsive UI
+- Heart displays over gif when hover, other fun UI updates (animation?)
+- Gif Modal to view more information about gif and favorite/update labels
+- Search on the users created labels/categories
+- Export/Post gif to email or social media
